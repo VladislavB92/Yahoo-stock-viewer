@@ -9,9 +9,4 @@ use App\Controllers\StockAssetsController;
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-
 $show = (new StockAssetsController)->show();
-
-/*
-
-*/
