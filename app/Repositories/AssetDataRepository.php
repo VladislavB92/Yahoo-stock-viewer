@@ -7,6 +7,7 @@ namespace App\Repositories;
 use Scheb\YahooFinanceApi\ApiClient;
 use Scheb\YahooFinanceApi\ApiClientFactory;
 use App\Managers\DatabaseManager;
+use Scheb\YahooFinanceApi\ResultDecoder;
 
 class AssetDataRepository
 {
