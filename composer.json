@@ -1,0 +1,22 @@
+{
+    "name": "vlad/yahoo-stock-viewer",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "description": "Yahoo stock viewer",
+    "type": "project",
+    "require": {
+        "doctrine/dbal": "^2.12",
+        "vlucas/phpdotenv": "^5.2",
+        "scheb/yahoo-finance-api": "^4.0"
+    },
+    "authors": [
+        {
+            "name": "Vladislavs Buzinskis",
+            "email": "intelifoxgames@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
