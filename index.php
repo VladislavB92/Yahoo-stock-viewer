@@ -13,27 +13,5 @@ $dotenv->load();
 $show = (new StockAssetsController)->show();
 
 /*
-DatabaseManager::query()
-    ->insert('stock_info')
-    ->values([
-        'symbol' => ':symbol',
-        'open' => ':open',
-        'high' => ':high',
-        'low' => ':low',
-        'close' => ':close',
-        'adjClose' => ':adjClose',
-        'volume' => ':volume',
-        'date' => ':date'
-    ])
-    ->setParameters([
-        'symbol' => $searchedStock,
-        'open' => $open,
-        'high' => $high,
-        'low' => $low,
-        'close' => $close,
-        'adjClose' => $adjClose,
-        'volume' => $volume,
-        'date' => $date
-    ])
-    ->execute();
+
 */

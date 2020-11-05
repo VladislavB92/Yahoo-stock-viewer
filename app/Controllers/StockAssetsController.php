@@ -12,7 +12,6 @@ class StockAssetsController
     {
         $actualAssetData = (new StockService)->execute();
 
-
         return require_once __DIR__ . '/../Views/StockView.php';
     }
 }

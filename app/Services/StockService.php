@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Repositories\YahooDataPullRepository;
-
 use App\Models\StockAsset;
+use App\Repositories\AssetDataRepository;
+use App\Repositories\SqlAssetDataRepository;
 
 class StockService
 {
@@ -16,21 +16,47 @@ class StockService
 
             $assetSymbol = $_GET['asset'];
 
-            $stockPullRepository = new YahooDataPullRepository($assetSymbol);
+            $assetDataRepository = new AssetDataRepository($assetSymbol);
 
-            $receivedAssettData = $stockPullRepository->searchBySymbol();
+            $sqlAssetDataRepository = new SqlAssetDataRepository($assetSymbol);
 
-            $stockAsset = new StockAsset(
-                $assetSymbol,
-                $receivedAssettData['open'],
-                $receivedAssettData['high'],
-                $receivedAssettData['low'],
-                $receivedAssettData['close'],
-                $receivedAssettData['adjClose'],
-                $receivedAssettData['volume'],
-                $receivedAssettData['date']['date']
-            );
+
+            if (!empty($sqlAssetDataRepository->searchBySymbol())) {
+
+                $receivedAssettData = $sqlAssetDataRepository->searchBySymbol();
+
+                $stockAsset = new StockAsset(
+                    $assetSymbol,
+                    (float) $receivedAssettData['open'],
+                    (float) $receivedAssettData['high'],
+                    (float)  $receivedAssettData['low'],
+                    (float)$receivedAssettData['close'],
+                    (float) $receivedAssettData['adjClose'],
+                    (float) $receivedAssettData['volume'],
+                    $receivedAssettData['date']
+                );
+
+                return $stockAsset;
+
+            } else {
+
+                $receivedAssettData = $assetDataRepository->searchBySymbol();
+
+                var_dump($receivedAssettData);
+
+                $stockAsset = new StockAsset(
+                    $assetSymbol,
+                    (float) $receivedAssettData['open'],
+                    (float) $receivedAssettData['high'],
+                    (float)  $receivedAssettData['low'],
+                    (float)$receivedAssettData['close'],
+                    (float) $receivedAssettData['adjClose'],
+                    (float) $receivedAssettData['volume'],
+                    $receivedAssettData['date']['date']
+                );
+
+                return $stockAsset;
+            }
         }
-        return $stockAsset;
     }
 }
