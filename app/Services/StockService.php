@@ -34,7 +34,7 @@ class StockService
                 (float)$receivedAssettData['close'],
                 (float) $receivedAssettData['adjClose'],
                 (float) $receivedAssettData['volume'],
-                (string) $receivedAssettData['date']
+                $receivedAssettData['date']
             );
 
             return $stockAsset;

@@ -27,8 +27,8 @@ class SqlAssetDataRepository
             ->execute()
             ->fetchAllAssociative();
 
-            foreach($sqlData as $responseData){
-                return $responseData;
-            }
+        foreach ($sqlData as $responseData) {
+            return $responseData;
+        }
     }
 }

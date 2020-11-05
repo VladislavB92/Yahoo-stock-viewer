@@ -57,7 +57,7 @@ class AssetDataRepository
                 'close' => $this->responseData['close'],
                 'adjClose' => $this->responseData['adjClose'],
                 'volume' => $this->responseData['volume'],
-                'date' => $this->responseData['date']['date']
+                'date' => implode("", $this->responseData['date'])
             ])
             ->execute();
     }

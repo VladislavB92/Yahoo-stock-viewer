@@ -14,7 +14,7 @@ class StockAsset
     private float $close;
     private float $adjClose;
     private float $volume;
-    private string $date;
+    private $date;
 
     public function __construct(
         string $symbol,
@@ -24,7 +24,7 @@ class StockAsset
         float $close,
         float $adjClose,
         float $volume,
-        string $date
+        $date
     ) {
         $this->symbol = $symbol;
         $this->open = $open;
@@ -71,8 +71,11 @@ class StockAsset
         return $this->volume;
     }
 
-    public function getDate(): string
+    public function getDate()
     {
+        if (gettype($this->date) == 'array') {
+            return implode("", $this->date);
+        }
         return $this->date;
     }
 }
