@@ -20,43 +20,24 @@ class StockService
 
             $sqlAssetDataRepository = new SqlAssetDataRepository($assetSymbol);
 
-
             if (!empty($sqlAssetDataRepository->searchBySymbol())) {
-
                 $receivedAssettData = $sqlAssetDataRepository->searchBySymbol();
-
-                $stockAsset = new StockAsset(
-                    $assetSymbol,
-                    (float) $receivedAssettData['open'],
-                    (float) $receivedAssettData['high'],
-                    (float)  $receivedAssettData['low'],
-                    (float)$receivedAssettData['close'],
-                    (float) $receivedAssettData['adjClose'],
-                    (float) $receivedAssettData['volume'],
-                    $receivedAssettData['date']
-                );
-
-                return $stockAsset;
-
             } else {
-
                 $receivedAssettData = $assetDataRepository->searchBySymbol();
-
-                var_dump($receivedAssettData);
-
-                $stockAsset = new StockAsset(
-                    $assetSymbol,
-                    (float) $receivedAssettData['open'],
-                    (float) $receivedAssettData['high'],
-                    (float)  $receivedAssettData['low'],
-                    (float)$receivedAssettData['close'],
-                    (float) $receivedAssettData['adjClose'],
-                    (float) $receivedAssettData['volume'],
-                    $receivedAssettData['date']['date']
-                );
-
-                return $stockAsset;
             }
+
+            $stockAsset = new StockAsset(
+                $assetSymbol,
+                (float) $receivedAssettData['open'],
+                (float) $receivedAssettData['high'],
+                (float)  $receivedAssettData['low'],
+                (float)$receivedAssettData['close'],
+                (float) $receivedAssettData['adjClose'],
+                (float) $receivedAssettData['volume'],
+                (string) $receivedAssettData['date']
+            );
+
+            return $stockAsset;
         }
     }
 }

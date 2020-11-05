@@ -15,8 +15,10 @@ class SqlAssetDataRepository
         $this->searchedAssetSymbol = $searchedAssetSymbol;
     }
 
-    public function searchBySymbol(): array
+    public function searchBySymbol()
     {
+        $responseData = [];
+
         $sqlData = DatabaseManager::query()
             ->select('*')
             ->from('stock_info')
@@ -25,6 +27,8 @@ class SqlAssetDataRepository
             ->execute()
             ->fetchAllAssociative();
 
-        return $sqlData[0];
+            foreach($sqlData as $responseData){
+                return $responseData;
+            }
     }
 }

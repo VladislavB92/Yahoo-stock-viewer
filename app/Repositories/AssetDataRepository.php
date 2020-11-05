@@ -18,7 +18,7 @@ class AssetDataRepository
         $this->searchedAssetSymbol = $searchedAssetSymbol;
     }
 
-    public function searchBySymbol(): array
+    public function searchBySymbol()
     {
         $client = ApiClientFactory::createApiClient();
 
