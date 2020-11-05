@@ -4,30 +4,28 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-class Stock
+class StockAsset
 {
     private int $id;
     private string $symbol;
-    private string $open;
-    private string $high;
-    private string $low;
-    private string $close;
-    private string $adjClose;
-    private string $volume;
+    private float $open;
+    private float $high;
+    private float $low;
+    private float $close;
+    private float $adjClose;
+    private float $volume;
     private string $date;
 
     public function __construct(
-        int $id,
         string $symbol,
-        string $open,
-        string $high,
-        string $low,
-        string $close,
-        string $adjClose,
-        string $volume,
+        float $open,
+        float $high,
+        float $low,
+        float $close,
+        float $adjClose,
+        float $volume,
         string $date
     ) {
-        $this->id = $id;
         $this->symbol = $symbol;
         $this->open = $open;
         $this->high = $high;
@@ -43,32 +41,32 @@ class Stock
         return $this->symbol;
     }
 
-    public function getOpen(): string
+    public function getOpen(): float
     {
         return $this->open;
     }
 
-    public function getHigh(): string
+    public function getHigh(): float
     {
         return $this->high;
     }
 
-    public function getLow(): string
+    public function getLow(): float
     {
         return $this->low;
     }
 
-    public function getClose(): string
+    public function getClose(): float
     {
         return $this->close;
     }
 
-    public function getAdjClose(): string
+    public function getAdjClose(): float
     {
         return $this->adjClose;
     }
 
-    public function getVolume(): string
+    public function getVolume(): float
     {
         return $this->volume;
     }

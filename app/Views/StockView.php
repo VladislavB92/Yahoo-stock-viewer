@@ -14,6 +14,18 @@
             <button type="submit">Search</button>
         </form>
     </div>
+
+    <div class="show_asset">
+        <h2><?php echo $actualAssetData->getSymbol(); ?></h2>
+        Date: <?php echo $actualAssetData->getDate(); ?><br>
+        Close: <?php echo $actualAssetData->getClose(); ?><br>
+        Open: <?php echo $actualAssetData->getOpen(); ?><br>
+        Adjusted Closing Price: <?php echo $actualAssetData->getAdjClose(); ?><br>
+        High: <?php echo $actualAssetData->getHigh(); ?><br>
+        Low: <?php echo $actualAssetData->getLow(); ?><br>
+        Volume: <?php echo $actualAssetData->getVolume(); ?><br>
+
+    </div>
 </body>
 
 </html>
