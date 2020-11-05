@@ -7,7 +7,7 @@ namespace App\Repositories;
 use Scheb\YahooFinanceApi\ApiClient;
 use Scheb\YahooFinanceApi\ApiClientFactory;
 use App\Managers\DatabaseManager;
-use Scheb\YahooFinanceApi\ResultDecoder;
+use Carbon\Carbon;
 
 class AssetDataRepository
 {
@@ -31,13 +31,12 @@ class AssetDataRepository
         );
 
         $this->responseData = json_decode(json_encode($historicalData[0]), true);
-        $this->save();
-
-        return $this->responseData;
     }
 
     public function save()
     {
+        $this->searchBySymbol();
+
         DatabaseManager::query()
             ->insert('stock_info')
             ->values([
@@ -48,7 +47,8 @@ class AssetDataRepository
                 'close' => ':close',
                 'adjClose' => ':adjClose',
                 'volume' => ':volume',
-                'date' => ':date'
+                'date' => ':date',
+                'time_updated' => ':time_updated'
             ])
             ->setParameters([
                 'symbol' => $this->searchedAssetSymbol,
@@ -58,7 +58,8 @@ class AssetDataRepository
                 'close' => $this->responseData['close'],
                 'adjClose' => $this->responseData['adjClose'],
                 'volume' => $this->responseData['volume'],
-                'date' => implode("", $this->responseData['date'])
+                'date' => implode(" ", $this->responseData['date']),
+                'time_updated' => Carbon::now()->toDateTimeString()
             ])
             ->execute();
     }

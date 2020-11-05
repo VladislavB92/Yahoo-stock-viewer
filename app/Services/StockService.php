@@ -23,7 +23,8 @@ class StockService
             if (!empty($sqlAssetDataRepository->searchBySymbol())) {
                 $receivedAssettData = $sqlAssetDataRepository->searchBySymbol();
             } else {
-                $receivedAssettData = $assetDataRepository->searchBySymbol();
+                $assetDataRepository->save();
+                $receivedAssettData = $sqlAssetDataRepository->searchBySymbol();
             }
 
             $stockAsset = new StockAsset(
@@ -34,9 +35,9 @@ class StockService
                 (float)$receivedAssettData['close'],
                 (float) $receivedAssettData['adjClose'],
                 (float) $receivedAssettData['volume'],
-                $receivedAssettData['date']
+                $receivedAssettData['date'],
+                $receivedAssettData['time_updated']
             );
-
             return $stockAsset;
         }
     }

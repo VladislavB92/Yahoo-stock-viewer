@@ -27,7 +27,8 @@
             Adjusted Closing Price: <?php echo $actualAssetData->getAdjClose(); ?><br>
             High: <?php echo $actualAssetData->getHigh(); ?><br>
             Low: <?php echo $actualAssetData->getLow(); ?><br>
-            Volume: <?php echo $actualAssetData->getVolume(); ?>
+            Volume: <?php echo $actualAssetData->getVolume(); ?><br>
+            Time updated: <?php echo $actualAssetData->getTimeUpdated(); ?>
         <?php endif; ?>
 
     </div>
