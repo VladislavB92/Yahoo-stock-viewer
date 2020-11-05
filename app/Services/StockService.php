@@ -28,7 +28,7 @@ class StockService
                 $dataUpdateTime = Carbon::create($receivedAssettData['time_updated']);
                 $difference = $dataUpdateTime->diffInMinutes(Carbon::now());
 
-                if ($difference >= 1) {
+                if ($difference >= 10) {
                     $assetDataRepository->update();
                     $receivedAssettData = $sqlAssetDataRepository->searchBySymbol();
                     echo ' INFO UPDATED!';
