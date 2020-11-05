@@ -63,4 +63,33 @@ class AssetDataRepository
             ])
             ->execute();
     }
+
+    public function update()
+    {
+        $this->searchBySymbol();
+
+        DatabaseManager::query()
+            ->update('stock_info')
+            ->set('open', ':open')
+            ->set('high', ':high')
+            ->set('low', ':low')
+            ->set('close', ':close')
+            ->set('adjClose', ':adjClose')
+            ->set('volume', ':volume')
+            ->set('date', ':date')
+            ->set('time_updated', ':time_updated')
+            ->where('symbol = :symbol')
+            ->setParameters([
+                'symbol' => $this->searchedAssetSymbol,
+                'open' => $this->responseData['open'],
+                'high' => $this->responseData['high'],
+                'low' => $this->responseData['low'],
+                'close' => $this->responseData['close'],
+                'adjClose' => $this->responseData['adjClose'],
+                'volume' => $this->responseData['volume'],
+                'date' => implode(" ", $this->responseData['date']),
+                'time_updated' => Carbon::now()->toDateTimeString()
+            ])
+            ->execute();
+    }
 }

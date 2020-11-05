@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Models\StockAsset;
 use App\Repositories\AssetDataRepository;
 use App\Repositories\SqlAssetDataRepository;
+use Carbon\Carbon;
 
 class StockService
 {
@@ -21,7 +22,17 @@ class StockService
             $sqlAssetDataRepository = new SqlAssetDataRepository($assetSymbol);
 
             if (!empty($sqlAssetDataRepository->searchBySymbol())) {
+
                 $receivedAssettData = $sqlAssetDataRepository->searchBySymbol();
+
+                $dataUpdateTime = Carbon::create($receivedAssettData['time_updated']);
+                $difference = $dataUpdateTime->diffInMinutes(Carbon::now());
+
+                if ($difference >= 1) {
+                    $assetDataRepository->update();
+                    $receivedAssettData = $sqlAssetDataRepository->searchBySymbol();
+                    echo ' INFO UPDATED!';
+                }
             } else {
                 $assetDataRepository->save();
                 $receivedAssettData = $sqlAssetDataRepository->searchBySymbol();
@@ -38,6 +49,7 @@ class StockService
                 $receivedAssettData['date'],
                 $receivedAssettData['time_updated']
             );
+
             return $stockAsset;
         }
     }
