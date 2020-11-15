@@ -26,8 +26,8 @@ class AssetDataRepository
         $historicalData = $client->getHistoricalData(
             $this->searchedAssetSymbol,
             ApiClient::INTERVAL_1_DAY,
-            new \DateTime("today"),
-            new \DateTime("now")
+            new \DateTime("-1 days"),
+            new \DateTime("today")
         );
 
         $this->responseData = json_decode(json_encode($historicalData[0]), true);
